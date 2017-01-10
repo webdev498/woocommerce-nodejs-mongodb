@@ -1,0 +1,33 @@
+<div class="posts" ng-controller="PostsCtrl as postsCtrl">
+
+    <div class="post" ng-repeat="post in posts">
+        <div class="post-main">
+            <div class="post-video-image">
+                <img ng-src="{{post.video.youTube.images.high.url}}" />
+            </div>
+            <div class="post-info">
+                <div class="post-header">
+                    <div class="post-title"><h1>{{post.title}}</h1></div>
+                    <div class="post-views"><h4>{{post.viewsCount | number:0}}</h4></div>
+                </div>
+                <div class="post-details">
+                    <div class="post-user">Added by: {{post.user.name.first}} {{post.user.name.last}}</div>
+                    <div class="post-social">{{post.likesCount}}  {{post.commentsCount}} {{post.sharesCount}}</div>
+                </div>
+            </div>
+        </div>
+        <div class="post-products" ng-controller="PostProductsCtrl as postProductsCtrl">
+            <div class="post-product" ng-repeat="postProduct in post.postProducts | orderBy: ['-rank', '-createdAt']">
+                <div class="post-product-image">
+                    <img ng-src="{{postProduct.product.images[0]}}" />
+                </div>
+                <div class="post-product-title"><h4>{{postProduct.product.title}}</h4></div>
+                <div class="post-product-price"><h6>{{postProduct.product.price.amount | currency:'$':2}}</h6></div>
+                <div class="post-product-action">
+                    <button ng-click="postProductsCtrl.redirectToProductLink(postProduct)">Buy Now ></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
